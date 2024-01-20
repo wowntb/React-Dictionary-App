@@ -1,6 +1,7 @@
 /* Dear code reviewer, I was meant to use the Merriam Webster API but their automated system 
 would not allow me to sign up. I contacted a mentor and they allowed me to use an alternative: WordsAPI. */
 // This is a React dictionary app. The user can enter a word and receive the definition of it.
+// Deployed at https://react-dictionary-7e98d3dd2047.herokuapp.com/
 import { useState, useEffect } from "react";
 import "./Dictionary.css";
 // I have avoided hardcoding my API key and used .env to store it.
