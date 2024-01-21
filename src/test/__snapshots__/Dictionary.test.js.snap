@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <h1>
+    React Dictionary App
+  </h1>,
+  <div>
+    <p
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      Would you like the definition of a word? Simply type the word in the search bar below.
+    </p>
+    <div
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      <input
+        id="searchInput"
+        placeholder="Enter a word"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+        type="text"
+      />
+      <button
+        onClick={[Function]}
+      >
+        Search
+      </button>
+    </div>
+  </div>,
+  <footer>
+    Coded by Nathenale Bedane
+  </footer>,
+]
+`;
