@@ -83,8 +83,6 @@ function Dictionary() {
           </p>
         </div>
       )}
-
-      <footer>Coded by Nathenale Bedane</footer>
     </>
   );
 }
