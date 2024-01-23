@@ -60,6 +60,14 @@ function Dictionary() {
           <p>
             Definition: <em>{data.results && data.results[0].definition}.</em>
           </p>
+          <p>
+            Example:
+            <em>
+              {data.results &&
+                data.results[0].examples &&
+                data.results[0].examples[0]}
+            </em>
+          </p>
         </div>
       )}
 
