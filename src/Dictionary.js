@@ -9,26 +9,38 @@ const apiKey = process.env.REACT_APP_WORDS_API_KEY;
 
 function Dictionary() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState(null);
+  const [definitionData, setDefinitionData] = useState(null);
+  const [exampleData, setExampleData] = useState(null);
 
-  // useEffect is being utilised so that when the state of searchTerm is altered the program fetches data from the API again.
   useEffect(() => {
     if (searchTerm !== "") {
-      const apiUrl = `https://wordsapiv1.p.rapidapi.com/words/${searchTerm}`;
-
-      fetch(apiUrl, {
+      // Fetch for getting the definition of the word.
+      const definitionApiUrl = `https://wordsapiv1.p.rapidapi.com/words/${searchTerm}/definitions`;
+      fetch(definitionApiUrl, {
         method: "GET",
         headers: {
           "X-RapidAPI-Key": apiKey,
           "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
         },
       })
-        // The response is parsed to JSON.
         .then((response) => response.json())
-        // The JSON is saved in state.
-        .then((result) => setData(result))
-        // This is a line for catching an with the fetch.
-        .catch((error) => console.error("Error fetching data:", error));
+        .then((result) => setDefinitionData(result))
+        .catch((error) =>
+          console.error("Error fetching definition data:", error)
+        );
+
+      // Fetch for getting an example of the word in a sentence.
+      const exampleApiUrl = `https://wordsapiv1.p.rapidapi.com/words/${searchTerm}/examples`;
+      fetch(exampleApiUrl, {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": apiKey,
+          "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => setExampleData(result))
+        .catch((error) => console.error("Error fetching example data:", error));
     }
   }, [searchTerm]);
 
@@ -41,8 +53,8 @@ function Dictionary() {
       <h1>React Dictionary App</h1>
       <div>
         <p style={{ textAlign: "center" }}>
-          Would you like the definition of a word? Simply type the word in the
-          search bar below.
+          Would you like the definition and example of a word? Simply type the
+          word in the search bar below.
         </p>
         <div style={{ textAlign: "center" }}>
           <input
@@ -54,19 +66,20 @@ function Dictionary() {
           <button onClick={handleSearch}>Search</button>
         </div>
       </div>
-      {data && (
+      {definitionData && exampleData && (
         <div className="section">
           <h2>{searchTerm}</h2>
           <p>
-            Definition: <em>{data.results && data.results[0].definition}.</em>
+            Definition:
+            <em>
+              {" "}
+              {definitionData.definitions &&
+                definitionData.definitions[0].definition}
+              .
+            </em>
           </p>
           <p>
-            Example:
-            <em>
-              {data.results &&
-                data.results[0].examples &&
-                data.results[0].examples[0]}
-            </em>
+            Example: <em>{exampleData.examples && exampleData.examples[0]}.</em>
           </p>
         </div>
       )}
